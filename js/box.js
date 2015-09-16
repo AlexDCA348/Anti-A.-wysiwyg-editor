@@ -111,19 +111,65 @@ function init(){
 
 
 
-function box(id, name, index, type, posX, posY, width, height, content){
-	this.id = id; 
-	this.name = name;
-	this.index = index; 
-	this.type = type;
-	this.posX = posX; 
-	this.posY = posY; 
-	this.width = width;
-	this.height = height;
-	this.content = content;
+function Box(id, name, index, type, posX, posY, contentW, contentH, content){
+	 // this.id = "BOX-"+id;
+	
+	// this.content = content; // différent de innerHTML, pour le texte c'est le contenenu de cke / pour l'image c'est le l'url ...
 
-	var box = document.createElement("div");
-	document.body.appendChild(box);
+	var Elmt = document.createElement("div");
+	document.body.appendChild(Elmt);
+	Elmt.id = id;
+	boxList.push(Elmt.id);
+
+	Elmt.name = name;
+	Elmt.index = index; 
+	this.type = type;
+	// this.posX = posX; // peut-etre retirer le padding du contener
+	// this.posY = posY; // peut-etre retirer le padding du contener
+	console.log("name :" +Elmt.name);
+
+	Elmt.style.position = "absolute";
+	Elmt.style.left = posX+"px";
+	Elmt.style.top = posY+"px";
+	Elmt.style.width = "auto";
+	Elmt.style.height = "auto";
+	
+
+
+	if(type == "text"){
+		Elmt.className = "texte box";
+
+		Elmt.innerHTML = "<div class=\"moveTool\">move</div> <div class=\"index\">"+boxesIndex+"</div> <div class=\"textTool\"> <textarea class=\"editor\" name=\"\" id=\"txt_"+Elmt.name+"\"> ... </textarea></div> <button class=\"deleteBTN\">delete</button>";
+		CKEDITOR.replace('txt_'+Elmt.name);
+		this.content = CKEDITOR.instances["txt_"+Elmt.name].getData();
+		this.contentW = $("#"+Elmt.id).find('iframe').width(); //
+		this.contentH = $("#"+Elmt.id).find('iframe').height(); //
+	}
+	if(type == "img"){
+		Elmt.className = "image box";
+		// changer l'url de src img
+		Elmt.innerHTML = "<div class=\"moveTool\">move</div> <div class=\"index\">"+boxesIndex+"</div> <img src=\"asets/windows95-small.jpg\" alt=\"\"> <div class=\"resizeTool\">◢</div> <button class=\"deleteBTN\">delete</button>";
+		// this.content = document.getElementById(this.id).getElementsByTagName('img').src;
+		this.contentW = $("#"+Elmt.id).find('img').width(); //
+		this.contentH = $("#"+Elmt.id).find('img').height(); //
+	}
+	if(type == "video"){
+		Elmt.className = "box";
+		Elmt.innerHTML = "<div class=\"moveTool\">move</div> <div class=\"index\">"+boxesIndex+"</div> lien vimeo <div class=\"resizeTool\">◢</div> <button class=\"deleteBTN\">delete</button>";
+		this.content = "lien vimeo";
+	}
+	if(type == "audio"){
+		Elmt.className = "box";
+		Elmt.innerHTML = "<div class=\"moveTool\">move</div> <div class=\"index\">"+boxesIndex+"</div> lien audio <div class=\"resizeTool\">◢</div> <button class=\"deleteBTN\">delete</button>";
+		this.content = "lien audio";	
+	}
+
+	$(".box .moveTool").bind("mousedown", StartDragBox);
+	$(".box .deleteBTN").bind("click", deleteBox);
+	$(".box .index").bind("click", editIndexPrint);
+	$(".resizeTool").bind("mousedown", StartResize);
+
+
 }
 
 function createTxtBox(){
@@ -131,38 +177,21 @@ function createTxtBox(){
 	var name = prompt("please enter the box's name", "");
 	
 	if(name != "" || name == null){
-		// var box = document.createElement("div");
-		// box.style.left = (screenWidth-300)/2+"px";
-		// box.style.top = (screenHeight)/2+"px";
-		// //ID
-		// boxesIndex ++;
-		// idList ++;
-		// box.id = "texteBox-"+idList;
 
-		// boxList.push(box.id);
-
-		// box.className = "texte box";
-
-		// box.index = boxesIndex;
-		// box.name = name;
-
-		// box.innerHTML = "<div class=\"moveTool\">move</div> <div class=\"index\">"+boxesIndex+"</div> <div class=\"textTool\"> <textarea class=\"editor\" name=\"\" id=\"txt_"+box.name+"\"> ... </textarea></div> <button class=\"deleteBTN\">delete</button>"
-		// box.style.position="absolute";
-		// // document.body.appendChild(box);
-
-		// console.log("txt created")
-		// $(".texte .moveTool").bind("mousedown", StartDragBox);
-		// $(".texte .deleteBTN").bind("click", deleteBox);
-		
-		// $(".texte .index").bind("click", editIndexPrint);
-
-		// // $( 'textarea.editor' ).ckeditor();
-		// CKEDITOR.replace('txt_'+box.name);
+		boxesIndex ++;
+		idList ++;
 
 
-		
+		var box = new Box(
+			"texteBox-"+idList,
+			name,
+			boxesIndex,
+			"text",
+			(screenWidth-300)/2,
+			(screenHeight)/2
+		);
 
-		
+		console.log("txt created");
 
 
 	}else{
@@ -170,7 +199,33 @@ function createTxtBox(){
 		createTxtBox();
 	}
 	
+	console.log(boxList);
 
+}
+
+
+function createImgBox(){
+	var name = prompt("please enter the box's name", "");
+
+	if(name != "" || name == null){
+
+		boxesIndex ++;
+		idList ++;
+
+		var box = new Box(
+			"imgBox-"+idList,
+			name,
+			boxesIndex,
+			"img",
+			(screenWidth-300)/2,
+			(screenHeight)/2
+		);
+
+	}else{
+		alert('Vous devez donner un nom à votre nouvelle élément');
+		createImgBox();
+	}
+	console.log("img created")
 }
 
 
@@ -217,48 +272,7 @@ function cloneTxtBox(ID, name, index, left, top, w, h, content){
 
 }
 
-function createImgBox(){
-	var name = prompt("please enter the box's name", "");
 
-	if(name != "" || name == null){
-		var box = document.createElement("div");
-		// box.src = "asets/windows95.jpg";
-		box.style.left = (screenWidth-300)/2+"px";
-		box.style.top = (screenHeight)/2+"px";
-		// ID
-		boxesIndex ++;
-		idList ++;
-
-		box.id = "ImgBox-"+idList;
-
-		boxList.push(box.id);
-
-		box.className = "image box";
-
-		box.name = name;
-		box.index = boxesIndex;
-
-
-		box.innerHTML = "<div class=\"moveTool\">move</div> <div class=\"index\">"+boxesIndex+"</div> <img src=\"asets/windows95-small.jpg\" alt=\"\"> <div class=\"resizeTool\">◢</div> <button class=\"deleteBTN\">delete</button>"
-		box.style.position="absolute";
-		document.body.appendChild(box);
-
-		$(".image .moveTool").bind("mousedown", StartDragBox);
-		$(".image .resizeTool").bind("mousedown", StartResize);
-
-		$(".image .deleteBTN").bind("click", deleteBox);
-
-		$(".image .index").bind("click", editIndexPrint);
-	}else{
-		alert('Vous devez donner un nom à votre nouvelle élément');
-		createImgBox();
-	}
-
-
-
-	console.log("img created")
-	// $(".texte .moveTool").bind("mousedown", StartDragBox);
-}
 
 
 /////
@@ -311,15 +325,15 @@ function editIndexPrint(){
 }
 
 function hoverElement(el){
-	console.log("hover");
-	console.log(el);
+	// console.log("hover");
+	// console.log(el);
 	var cible = "#"+String(el);
 	$(cible).addClass('hightlight');
 }
 
 function outElement(el){
-	console.log("out");
-	var cible = "#"+String(el);
+	// console.log("out");
+	// var cible = "#"+String(el);
 	$(cible).removeClass('hightlight');
 }
 
