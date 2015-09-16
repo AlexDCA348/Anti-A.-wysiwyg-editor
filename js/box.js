@@ -109,38 +109,60 @@ function init(){
 }
 
 
+
+
+function box(id, name, index, type, posX, posY, width, height, content){
+	this.id = id; 
+	this.name = name;
+	this.index = index; 
+	this.type = type;
+	this.posX = posX; 
+	this.posY = posY; 
+	this.width = width;
+	this.height = height;
+	this.content = content;
+
+	var box = document.createElement("div");
+	document.body.appendChild(box);
+}
+
 function createTxtBox(){
 	
 	var name = prompt("please enter the box's name", "");
 	
 	if(name != "" || name == null){
-		var box = document.createElement("div");
-		box.style.left = (screenWidth-300)/2+"px";
-		box.style.top = (screenHeight)/2+"px";
-		//ID
-		boxesIndex ++;
-		idList ++;
-		box.id = "texteBox-"+idList;
+		// var box = document.createElement("div");
+		// box.style.left = (screenWidth-300)/2+"px";
+		// box.style.top = (screenHeight)/2+"px";
+		// //ID
+		// boxesIndex ++;
+		// idList ++;
+		// box.id = "texteBox-"+idList;
 
-		boxList.push(box.id);
+		// boxList.push(box.id);
 
-		box.className = "texte box";
+		// box.className = "texte box";
 
-		box.index = boxesIndex;
-		box.name = name;
+		// box.index = boxesIndex;
+		// box.name = name;
 
-		box.innerHTML = "<div class=\"moveTool\">move</div> <div class=\"index\">"+boxesIndex+"</div> <div class=\"textTool\"> <textarea class=\"editor\" name=\"\" id=\"txt_"+box.name+"\"> ... </textarea></div> <button class=\"deleteBTN\">delete</button>"
-		box.style.position="absolute";
-		document.body.appendChild(box);
+		// box.innerHTML = "<div class=\"moveTool\">move</div> <div class=\"index\">"+boxesIndex+"</div> <div class=\"textTool\"> <textarea class=\"editor\" name=\"\" id=\"txt_"+box.name+"\"> ... </textarea></div> <button class=\"deleteBTN\">delete</button>"
+		// box.style.position="absolute";
+		// // document.body.appendChild(box);
 
-		console.log("txt created")
-		$(".texte .moveTool").bind("mousedown", StartDragBox);
-		$(".texte .deleteBTN").bind("click", deleteBox);
+		// console.log("txt created")
+		// $(".texte .moveTool").bind("mousedown", StartDragBox);
+		// $(".texte .deleteBTN").bind("click", deleteBox);
 		
-		$(".texte .index").bind("click", editIndexPrint);
+		// $(".texte .index").bind("click", editIndexPrint);
 
-		// $( 'textarea.editor' ).ckeditor();
-		CKEDITOR.replace('txt_'+box.name);
+		// // $( 'textarea.editor' ).ckeditor();
+		// CKEDITOR.replace('txt_'+box.name);
+
+
+		
+
+		
 
 
 	}else{
