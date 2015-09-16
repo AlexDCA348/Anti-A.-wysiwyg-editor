@@ -1,0 +1,110 @@
+*{
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body{
+	/*background:url('../asets/bg-grid.jpg');*/
+}
+
+
+.toolsSet{
+	position:fixed;
+	display:none;
+}
+
+.moveTool{
+	cursor:move;
+}
+
+.texte {
+	display: block;
+	width:100%;
+	position:static!important;
+	float:none;
+	margin-top: 0.5cm;
+	/*padding:10px;*/
+}
+
+
+
+.texte .moveTool{
+	float: left;
+	background:lightblue;
+	margin-left: -20px;
+	margin-top: -20px;
+	background:white;
+	display:none;
+}
+
+.texte .index{
+	float:right;
+	background:yellow;
+	display:none;
+}
+.texte .textTool{
+	clear: both;
+	width:100%;
+	background:grey;
+	display:none;
+}
+
+.texte textarea{
+	width:100%!important;
+	height:auto!important;
+	display:block;
+	border:none;
+	font-size:14pt;
+}
+
+.image{
+	display: block!important;
+	width:100%!important;
+	position:static!important;
+	float:none;
+	margin-top: 0.5cm;
+}
+
+.image img{
+	width: 100%!important;
+}
+
+.image:hover{
+	background:rgba(100, 100, 100, 0.5);
+}
+
+.image .moveTool{
+	float: left;
+	background:lightblue;
+	margin-left: -20px;
+	margin-top: -20px;
+	background:white;
+	display:none;
+}
+
+.image .index{
+	float:right;
+	background:yellow;
+	display:none;
+}
+
+.image .resizeTool{
+	color:red;
+	text-align: right;
+	cursor:nwse-resize;
+	display:none;
+}
+
+.deleteBTN{
+	clear:both;
+	width:100%;
+	background:red;
+	display:none;
+}
+.editPrint-modal{
+	display:none;
+}

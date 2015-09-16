@@ -1,0 +1,237 @@
+<html>
+<head>
+	<title>creating-box</title>
+	<style>
+		#baseMap{
+			width:100%;
+			height:100%;
+			position:absolute;
+			background: grey;
+
+		}
+
+
+	</style>
+
+</head>
+<body>
+<button id="boxTool">Box Tool : off</button>
+
+<div id="baseMap"></div>
+
+
+
+
+<script>
+	/*
+	0: initiate with GUI.
+	1: creation box onclickDown. x,y à l'endroit du clickDown
+	2: dimension de la box onclickUP, xDown+xUP, yDown+yUP.
+	3: add a number for eachBox.	
+	4: possibilité de delete.
+	5: id unique.
+
+
+	
+
+
+
+	*/
+
+	var mouseX;
+	var mouseY;
+	var nbBox = 0;//default.
+	var lastBoxWidth;
+	var lastBoxHeight;
+	var boxTool = document.getElementById('boxTool');
+	var baseMap = document.getElementById('baseMap');
+	var boxToolTogle = false;
+
+
+	var boxList =[];
+
+	boxTool.addEventListener("click", function(){
+		init();
+	},false);
+
+	init();	
+
+
+
+	function Label(displaying){
+
+		if(displaying == "hide"){
+			for (var i = 0; i < boxList.length; i++) {
+				
+				if(document.getElementById('labelNumber-'+boxList[i])){
+					document.getElementById('labelNumber-'+boxList[i]).style.display="none";	
+				}
+				
+
+			};	
+		}else{
+			for (var i = 0; i < boxList.length; i++) {
+			
+				if(document.getElementById('labelNumber-'+boxList[i])){
+					document.getElementById('labelNumber-'+boxList[i]).style.display="block";	
+				}
+
+			};
+		}
+		
+
+	}
+
+	// Listener
+	function init(){
+
+		if(boxToolTogle == true){
+			Label("show");
+			boxTool.innerHTML = "Box Tool : on";
+			baseMap.style.cursor = "crosshair";
+			baseMap.addEventListener("mousedown", createBox, false);
+			baseMap.addEventListener("mousemove", getMouseXY, false);
+			baseMap.addEventListener("mouseup", finishBox, true);
+
+			boxToolTogle = false;
+		}else{
+			Label("hide");
+			boxTool.innerHTML = "Box Tool : Off";
+			baseMap.style.cursor = "default";
+			baseMap.removeEventListener("mousedown", createBox, false);
+			baseMap.removeEventListener("mousemove", getMouseXY, false);
+			baseMap.removeEventListener("mouseup", finishBox, true);
+			boxToolTogle = true;
+		}
+
+		
+	}
+	
+
+
+	function getMouseXY(e){
+		mouseX = e.pageX;
+		mouseY = e.pageY;
+	}
+
+
+
+	function createBox(){
+		nbBox++;
+
+		var box = document.createElement("textarea");
+		baseMap.appendChild(box);
+		box.style.position = "absolute";
+		box.style.background = "lightgrey";
+		box.style.left = mouseX;
+		box.style.top = mouseY;
+		box.id = "box-" + nbBox;
+
+		var labelNumber = document.createElement("div");
+		baseMap.appendChild(labelNumber);
+		labelNumber.style.position = "absolute";
+		labelNumber.style.top = mouseY-25+"px";
+		labelNumber.style.left = mouseX-25+"px";
+		labelNumber.style.background = "orange";
+		labelNumber.style.width = 25+"px";
+		labelNumber.style.height = 25+"px";
+		labelNumber.innerHTML = nbBox;
+		labelNumber.id = "labelNumber-" + nbBox;	
+
+		var deleteBtn = document.createElement("button");
+		baseMap.appendChild(deleteBtn);
+		deleteBtn.style.position = "absolute";
+		deleteBtn.style.top = mouseY+"px";
+		deleteBtn.style.left = mouseX-50+"px";
+		deleteBtn.style.background = "red";
+		deleteBtn.style.width = 50+"px";
+		deleteBtn.style.height = 25+"px";
+		deleteBtn.innerHTML = "delete";
+		deleteBtn.id = nbBox+"delete";
+
+		boxList.push(nbBox);
+
+
+		deleteBtn.addEventListener("click", deletingBox, false);
+			
+
+		baseMap.addEventListener("mousemove",dimensionBox, false);
+
+	}
+
+
+	function dimensionBox(){
+			
+		lastBoxWidth = document.getElementById("box-"+nbBox).style.width = mouseX-parseInt(document.getElementById("box-"+nbBox).style.left) +  "px";
+		// lastBoxHeight = document.getElementById("box-"+nbBox).style.height = 100+"px";
+		lastBoxHeight = document.getElementById("box-"+nbBox).style.height = mouseY-parseInt(document.getElementById("box-"+nbBox).style.top) +"px";
+
+	}
+
+	function finishBox(){
+		baseMap.removeEventListener("mousemove",dimensionBox, false);
+		document.getElementById("box-"+nbBox).style.width = lastBoxWidth;
+		document.getElementById("box-"+nbBox).style.height = lastBoxHeight;
+		document.getElementById("box-"+nbBox).removeEventListener("mouseup", finishBox, true);
+
+		console.log("nbBox: "+nbBox)
+	}
+
+
+	function deletingBox(e){
+		var nbToDelete = parseInt(e.target.id);
+		var boxToDelete = document.getElementById('box-'+nbToDelete);
+		var labelToDelete = document.getElementById('labelNumber-'+nbToDelete);
+		var deleteBtnToDelete = document.getElementById(nbToDelete+"delete");
+
+		baseMap.removeChild(boxToDelete);
+		baseMap.removeChild(labelToDelete);
+		baseMap.removeChild(deleteBtnToDelete);
+
+		boxList.splice(boxList.	indexOf(nbToDelete),1);
+
+		console.log(boxList);
+
+		nbBox--;
+	}
+
+/*
+	Objet : 
+		box {
+			id
+			index
+			type (txt, img, video, son)
+			content (txt(xml), img(url), video(url), son(url))
+			posX
+			posY
+			width
+			height
+		}
+
+	methodes : 
+		editer{
+			content (txt)
+			posX
+			posY
+			width
+			height
+		}
+
+		supprimer{
+			all
+		}
+
+		indexer{
+			index
+		}
+
+
+*/
+
+
+</script>
+
+
+
+</body>
+</html>

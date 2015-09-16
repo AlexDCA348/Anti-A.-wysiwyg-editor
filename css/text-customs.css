@@ -1,0 +1,101 @@
+/*TEXT CUSTOMS*/
+
+@font-face {
+    font-family: Fontin_sans_bold;
+	src: url(../fonts/Fontin_Sans_B_45b.otf);
+}
+@font-face {
+    font-family: Fontin_sans_bold_ital;
+	src: url(../fonts/Fontin_Sans_BI_45b.otf);
+}
+@font-face {
+    font-family: Fontin_sans_ital;
+	src: url(../fonts/Fontin_Sans_I_45b.otf);
+}
+@font-face {
+    font-family: Fontin_sans_reg;
+	src: url(../fonts/Fontin_Sans_R_45b.otf);
+}
+@font-face {
+    font-family: Fontin_sans_smallcaps;
+	src: url(../fonts/Fontin_Sans_SC_45b.otf);
+}
+@font-face {
+    font-family: Fontin_Bold;
+	src: url(../fonts/Fontin-Bold.otf);
+}
+@font-face {
+    font-family: Fontin_Ital;
+	src: url(../fonts/Fontin-Italic.otf);
+}
+@font-face {
+    font-family: Fontin_Reg;
+	src: url(../fonts/Fontin-Regular.otf);
+}
+@font-face {
+    font-family: Fontin_smallcaps;
+	src: url(../fonts/Fontin-SmallCaps.otf);
+}
+
+
+
+.mainTitle{
+	font-family: Fontin_Bold;
+	color:black;
+	font-size:50px;
+}
+
+.auteurName{
+	font-family: Fontin_sans_reg;
+	color:grey;
+	font-size:14px;
+}
+
+.summary{
+	font-family: Fontin_Reg;
+	color:grey;
+	font-size: 16px;
+}
+
+.date{
+	font-family: Fontin_sans_reg;
+	color:grey;
+	font-size:14px;
+}
+
+.tags{
+	font-family: Fontin_Ital;
+	color:blue;
+}
+
+.titre2{
+	font-family: Fontin_Bold;
+	color:black;
+	font-size:30px;
+}
+
+.titre3{
+	font-family: Fontin_smallcaps;
+	color:black;
+	font-size:16px;
+}
+
+.mainText{
+	font-family: Fontin_Reg;
+	font-size: 16px;
+	color:black;
+}
+
+
+.note{
+	font-family: Fontin_sans_reg;
+	font-weight: bold;
+	color:#000433;
+	text-decoration: underline;
+	cursor:pointer;
+}
+
+.mediaLegend{
+	font-family: Fontin_sans_ital;
+	color:grey;
+}

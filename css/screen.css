@@ -1,0 +1,208 @@
+*{
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body{
+	background:url('../asets/bg-grid.jpg');
+	margin:0;
+	padding:0;
+	font-family: helvetica, arial, sans-serif;
+	width:200%;
+	height:200%;
+}
+
+a{
+	color:blue;
+	text-decoration: underline;
+	cursor:pointer;
+}
+
+	
+.box{
+	z-index:0;
+}
+
+.box:hover{
+	z-index:100;
+}
+
+.toolsSet{
+	position:fixed;
+}
+
+.moveTool{
+	cursor:move;
+}
+
+.box {
+	display: inline-block;
+	position:absolute;
+	padding:10px;
+}
+
+.box:hover{
+	background:rgba(0, 0, 255, 0.5);
+}
+
+.texte *{
+	opacity:0;
+	border:none;
+}
+
+.texte:hover *{
+	opacity:1;
+}
+
+.texte .textTool{
+	opacity:1;
+}
+
+.texte .textTool *{
+	opacity:1;
+}
+
+.texte .cke{
+	border:none;
+	box-shadow: none;
+}
+
+.cke_editable{
+	background:white!important;
+	width:100%;
+	height:100%;
+}
+
+.texte .cke_contents{
+	opacity:1;	
+}
+
+.texte .cke_bottom {
+	opacity:0;
+}
+
+.texte:hover .cke_bottom {
+	opacity:1;
+}
+
+.texte .cke_inner{
+	background:transparent;
+}
+
+.box .moveTool{
+	float: left;
+	background:blue;
+	color:white;
+	text-transform:uppercase;
+	margin-left: -20px;
+	margin-top: -20px;
+	padding:5px;
+	border-radius: 5px;
+	font-size:10px;
+}
+
+.box .index{
+	float:right;
+	border-radius: 100px;
+	margin-top: -20px;
+	margin-right: -20px;
+	padding:5px;
+	width:15px;
+	height:15px;
+	text-align:center;
+	background:white;
+	border:1px solid blue;
+	color:blue;
+	cursor:pointer;
+}
+.box .textTool{
+	clear: both;
+	width:100%;
+	margin-top:15px;
+}
+
+.texte textarea{
+	max-width:350px;
+	max-height:800px;
+	display:block;
+}
+
+.image{
+	display: inline-block;
+	position:absolute;
+	padding:10px;
+	width:300px;
+}
+
+.image img{
+	width: 100%;
+}
+
+.image *{
+	opacity:0;
+}
+
+.image:hover *{
+	opacity:1;
+	z-index:100;
+}
+
+.image img{
+	opacity:1;
+}
+
+.image .resizeTool{
+	color:white;
+	margin-top:-20px;
+	text-align: right;
+	text-shadow:1px 1px 1px black;
+	cursor:nwse-resize;
+}
+
+.deleteBTN{
+	text-transform: uppercase;
+	clear:both;
+	margin-top:15px;
+	border-radius: 15px;
+	border:none;
+	cursor:pointer;	
+	width:100%;
+	background:red;
+	color:white;
+}
+
+.editPrint-modal{
+	background:rgba(255,255,255,0.7);
+	border:1px solid black;
+	width:50%;
+	height:100%;
+	position:fixed;
+	left:50%;
+	display:none;
+	z-index:100000;
+	padding: 3%;
+	overflow: auto;
+}
+
+.hightlight{
+	background:rgba(0, 0, 255, 0.5);
+}
+
+.hightlight *{
+	opacity:1!important;	
+}
+
+.note-viewer{
+	background:yellow;
+	font-size: 16px;
+	color:black;
+	padding:5px;
+	display:none;
+	position:absolute;
+	max-width:150px;
+	box-shadow: 2px 2px 5px grey;
+}

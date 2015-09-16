@@ -1,0 +1,30 @@
+texteBox-1:{
+	 name: Titre,
+	 index: 1,
+	 left: 141px,
+	 top: 66px,
+	 width: 278,
+	 height: 146,
+	 content: <h1 class="mainTitle">Titre</h1>
+},
+
+texteBox-2 :{
+	 name: texte,
+	 index: 2,
+	 left: 140px,
+	 top: 236px,
+	 width: 281,
+	 height: 425,
+	 content: <p class="mainText">Le&nbsp;<strong>Lorem Ipsum</strong>&nbsp;est simplement du faux texte employ&eacute; dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l&#39;imprimerie depuis les ann&eacute;es 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour r&eacute;aliser un livre sp&eacute;cimen de polices de texte. Il n&#39;a pas fait que survivre cinq si&egrave;cles, mais s&#39;est aussi adapt&eacute; &agrave; la bureautique informatique, sans que son contenu n&#39;en soit modifi&eacute;. Il a &eacute;t&eacute; popularis&eacute; dans les ann&eacute;es 1960 gr&acirc;ce &agrave; la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus r&eacute;cemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+
+},
+
+ImgBox-3 :{
+	 name: media,
+	 index: 3,
+	 left: 441px,
+	 top: 74px,
+	 width: null,
+	 height: null,
+	 content: undefined
+ }
